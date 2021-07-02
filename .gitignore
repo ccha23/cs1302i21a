@@ -2,6 +2,9 @@
 /autograded/
 /feedback/
 /gradebook.db
+/students/*.csv
+/students/*.ipynb
+
 private/
 **/media/texts/
 **/media/jupyter/
