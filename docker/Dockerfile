@@ -1,4 +1,4 @@
-FROM docker pull jupyter/scipy-notebook:python-3.8.8
+FROM jupyter/scipy-notebook:python-3.8.8
 
 USER root
 
@@ -72,8 +72,6 @@ RUN conda install --quiet --yes \
     'jupyter_contrib_nbextensions=0.5.*' \
     'rise=5.7.*' \
     'hide_code=0.6.*' \
-    # 'jupyter-vscode-proxy=0.1.*' \
-     && \
     && \
     jupyter nbextension enable code_prettify/code_prettify --sys-prefix && \
     jupyter nbextension enable init_cell/main --sys-prefix && \
@@ -82,19 +80,19 @@ RUN conda install --quiet --yes \
     jupyter nbextension enable codefolding/main --sys-prefix && \
     jupyter nbextension enable --section edit codefolding/edit --sys-prefix && \
     pip install --quiet --no-cache-dir \
-    'manim==0.7.*' && \
+    'manim==0.7.*' \
     'jupyter-www-proxy' \
     'mytutor' \
-    'git+https://github.com/jupyter/nbgrader.git@refs/pull/1421/head' \
+    'git+https://github.com/jupyter/nbgrader.git@refs/pull/1421/head' &&\
     conda clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
-RUN conda install --quiet --yes \
-    && \
-    conda clean --all -f -y && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
+# RUN conda install --quiet --yes \
+#     && \
+#     conda clean --all -f -y && \
+#     fix-permissions "${CONDA_DIR}" && \
+#     fix-permissions "/home/${NB_USER}"
 
 WORKDIR "${HOME}"
 
