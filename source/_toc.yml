@@ -1,0 +1,33 @@
+- file: README.md
+
+- part: Lecture notes
+  numbered: true
+  chapters:
+  - file: Lecture1/Introduction to Computer Programming.ipynb
+  - file: Lecture2/Values and Variables.ipynb
+  - file: Lecture2/Expressions and Arithmetic.ipynb
+  - file: Lecture3/Conditional Execution.ipynb
+  - file: Lecture3/Iteration.ipynb
+  - file: Lecture4/Using Functions.ipynb
+  - file: Lecture4/Writing Functions.ipynb
+  - file: Lecture5/Objects.ipynb
+  - file: Lecture6/More on Functions.ipynb
+  - file: Lecture7/Lists and Tuples.ipynb
+  - file: Lecture8/Dictionaries and Sets.ipynb
+  - file: Lecture9/Monte Carlo Simulation and Linear Algebra.ipynb
+  - file: Review/Review Questions.ipynb
+
+- part: Lab assignments
+  numbered: true
+  chapters:
+  - file: Lab1/Setup.ipynb
+  - file: Lab1/Card.ipynb
+  - file: Lab2/Calculators.ipynb
+  - file: Lab3a/Improved Quadratic Equation Solver.ipynb
+  - file: Lab3b/Big Number Conversion.ipynb
+  - file: Lab4/Mastermind.ipynb
+  - file: Lab5/Pandas.ipynb
+  - file: Lab6/Combinatorics.ipynb
+  - file: Lab7/Cybersecurity.ipynb
+  - file: Lab8/Information Theory.ipynb
+  - file: Lab9/Monte Carlo and Root Finding.ipynb

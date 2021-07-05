@@ -1,0 +1,8 @@
+version: '3'
+
+services: 
+    cs1302:
+        image: cs1302
+        build: 
+            context: .
+            dockerfile: Dockerfile
