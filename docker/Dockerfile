@@ -8,6 +8,7 @@ USER root
 RUN apt-get update --yes && \
     apt-get install --yes --no-install-recommends \
     build-essential \
+    curl \
     vim-tiny \
     git \
     inkscape \
@@ -52,16 +53,16 @@ RUN fix-permissions /etc/jupyter/
 ENV TZ=Hongkong
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-
-# RUN curl -fsSL https://code-server.dev/install.sh | sh \
-
+RUN curl -fsSL https://code-server.dev/install.sh | sh && \
+    rm -rf /home/jovyan/.cache/
 
 # Switch back to jovyan
 USER ${NB_UID}
 
 # Install Python 3 packages
 RUN conda install --quiet --yes \
-    'jupyter-server-proxy=3.0.*' \
+    'jupyter-server-proxy=3.1.*' \
+    'jupyter-vscode-proxy=0.1.*' \
     'jupyterlab-mathjax3=4.2.*' \
     'nbgitpuller=0.10.*' \
     'pandas=1.2.*' \
