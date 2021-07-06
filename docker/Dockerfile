@@ -72,6 +72,10 @@ RUN conda install --quiet --yes \
     'jupyter_contrib_nbextensions=0.5.*' \
     'rise=5.7.*' \
     'hide_code=0.6.*' \
+<<<<<<< HEAD
+=======
+    # 'jupyter-vscode-proxy=0.1.*' \
+>>>>>>> 2a7d6e449960a6affaa1d5468c343e1d61f69f78
     && \
     jupyter nbextension enable code_prettify/code_prettify --sys-prefix && \
     jupyter nbextension enable init_cell/main --sys-prefix && \
@@ -96,4 +100,3 @@ RUN conda install --quiet --yes \
     fix-permissions "/home/${NB_USER}"
 
 WORKDIR "${HOME}"
-
