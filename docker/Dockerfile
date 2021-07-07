@@ -8,6 +8,7 @@ USER root
 RUN apt-get update --yes && \
     apt-get install --yes --no-install-recommends \
     build-essential \
+    curl \
     vim-tiny \
     git \
     inkscape \
@@ -52,19 +53,18 @@ RUN fix-permissions /etc/jupyter/
 ENV TZ=Hongkong
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-
-# RUN curl -fsSL https://code-server.dev/install.sh | sh \
-
+RUN curl -fsSL https://code-server.dev/install.sh | sh && \
+    rm -rf /home/jovyan/.cache/
 
 # Switch back to jovyan
 USER ${NB_UID}
 
 # Install Python 3 packages
 RUN conda install --quiet --yes \
-    'jupyter-server-proxy=3.0.*' \
+    'jupyter-server-proxy=3.1.*' \
+    'jupyter-vscode-proxy=0.1.*' \
     'jupyterlab-mathjax3=4.2.*' \
     'nbgitpuller=0.10.*' \
-    'pandas=1.2.*' \
     'jupyterlab-system-monitor=0.8.*' \
     'jupyterlab-git=0.30.*' \
     'jupytext=1.11.*' \
@@ -72,7 +72,6 @@ RUN conda install --quiet --yes \
     'jupyter_contrib_nbextensions=0.5.*' \
     'rise=5.7.*' \
     'hide_code=0.6.*' \
-    # 'jupyter-vscode-proxy=0.1.*' \
     && \
     jupyter nbextension enable code_prettify/code_prettify --sys-prefix && \
     jupyter nbextension enable init_cell/main --sys-prefix && \
@@ -89,5 +88,11 @@ RUN conda install --quiet --yes \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
+RUN conda install --quiet --yes \
+    'xeus-python==0.12.*' \
+    && \
+    conda clean --all -f -y && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
 
 WORKDIR "${HOME}"
