@@ -61,6 +61,7 @@ USER ${NB_UID}
 
 # Install Python 3 packages
 RUN conda install --quiet --yes \
+    'jupyterhub=1.4.1' \
     'jupyter-server-proxy=3.1.*' \
     'jupyter-vscode-proxy=0.1.*' \
     'jupyterlab-mathjax3=4.2.*' \
