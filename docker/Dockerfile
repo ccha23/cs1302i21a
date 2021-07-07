@@ -72,6 +72,7 @@ RUN conda install --quiet --yes \
     'jupyter_contrib_nbextensions=0.5.*' \
     'rise=5.7.*' \
     'hide_code=0.6.*' \
+    'xeus-python==0.12.*' \
     && \
     jupyter nbextension enable code_prettify/code_prettify --sys-prefix && \
     jupyter nbextension enable init_cell/main --sys-prefix && \
@@ -84,15 +85,15 @@ RUN conda install --quiet --yes \
     'jupyter-www-proxy' \
     'mytutor' \
     'git+https://github.com/jupyter/nbgrader.git@refs/pull/1421/head' &&\
+    jupyter nbextension install --symlink --sys-prefix --py nbgrader && \
+    jupyter nbextension enable --sys-prefix --py nbgrader && \
+    jupyter serverextension enable --sys-prefix --py nbgrader  && \   
+    jupyter nbextension disable --sys-prefix formgrader/main --section=tree && \
+    jupyter nbextension disable --sys-prefix course_list/main --section=tree && \
+    jupyter serverextension disable --sys-prefix nbgrader.server_extensions.course_list && \
     conda clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
-RUN conda install --quiet --yes \
-    'xeus-python==0.12.*' \
-    && \
-    conda clean --all -f -y && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
 
 WORKDIR "${HOME}"
