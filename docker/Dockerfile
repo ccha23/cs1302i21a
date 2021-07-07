@@ -65,7 +65,6 @@ RUN conda install --quiet --yes \
     'jupyter-vscode-proxy=0.1.*' \
     'jupyterlab-mathjax3=4.2.*' \
     'nbgitpuller=0.10.*' \
-    'pandas=1.2.*' \
     'jupyterlab-system-monitor=0.8.*' \
     'jupyterlab-git=0.30.*' \
     'jupytext=1.11.*' \
@@ -90,7 +89,7 @@ RUN conda install --quiet --yes \
     fix-permissions "/home/${NB_USER}"
 
 RUN conda install --quiet --yes \
-    'xeus-python' \
+    'xeus-python==0.12.*' \
     && \
     conda clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
