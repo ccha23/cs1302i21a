@@ -17,6 +17,7 @@ RUN apt-get update --yes && \
     libxrender1 \
     lmodern \
     netcat \
+    pdf2svg \
     # ---- nbconvert dependencies ----
     texlive-xetex \
     texlive-fonts-recommended \
@@ -59,6 +60,7 @@ RUN curl -fsSL https://code-server.dev/install.sh | sh && \
 # Switch back to jovyan
 USER ${NB_UID}
 
+COPY fix-nbextensions /usr/local/bin/fix-nbextensions
 # Install Python 3 packages
 RUN conda install --quiet --yes \
     'jupyterhub=1.4.1' \
@@ -75,6 +77,7 @@ RUN conda install --quiet --yes \
     'hide_code=0.6.*' \
     'xeus-python==0.12.*' \
     && \
+    fix-nbextensions && \
     jupyter nbextension enable code_prettify/code_prettify --sys-prefix && \
     jupyter nbextension enable init_cell/main --sys-prefix && \
     jupyter nbextension enable scratchpad/main --sys-prefix && \
@@ -83,6 +86,7 @@ RUN conda install --quiet --yes \
     jupyter nbextension enable --section edit codefolding/edit --sys-prefix && \
     pip install --quiet --no-cache-dir \
     'manim==0.7.*' \
+    'itikz==0.1.*' \
     'jupyter-www-proxy' \
     'mytutor' \
     'git+https://github.com/jupyter/nbgrader.git@refs/pull/1421/head' &&\
