@@ -17,6 +17,7 @@ RUN apt-get update --yes && \
     libxrender1 \
     lmodern \
     netcat \
+    pandoc \
     pdf2svg \
     # ---- nbconvert dependencies ----
     texlive-xetex \
@@ -63,18 +64,21 @@ USER ${NB_UID}
 COPY fix-nbextensions /usr/local/bin/fix-nbextensions
 # Install Python 3 packages
 RUN conda install --quiet --yes \
-    'jupyterhub=1.4.1' \
+    'hide_code=0.6.*' \
+    'ipydrawio=1.1.*' \
+    'ipydrawio-export=1.1.*' \
     'jupyter-server-proxy=3.1.*' \
     'jupyter-vscode-proxy=0.1.*' \
-    'jupyterlab-mathjax3=4.2.*' \
-    'nbgitpuller=0.10.*' \
+    'jupyter-videochat=0.5.*' \
+    'jupyterhub=1.4.1' \
     'jupyterlab-system-monitor=0.8.*' \
     'jupyterlab-git=0.30.*' \
+    'jupyterlab-tour=3.1.*' \
     'jupytext=1.11.*' \
     'jupyter_nbextensions_configurator=0.4.*' \
     'jupyter_contrib_nbextensions=0.5.*' \
+    'nbgitpuller=0.10.*' \
     'rise=5.7.*' \
-    'hide_code=0.6.*' \
     'xeus-python==0.12.*' \
     && \
     fix-nbextensions && \
