@@ -44,10 +44,11 @@ RUN wget -O /tmp/install-tl-unx.tar.gz http://mirror.ctan.org/systems/texlive/tl
     tar -xzf /tmp/install-tl-unx.tar.gz -C /tmp/install-tl --strip-components=1 && \
     /tmp/install-tl/install-tl --profile=/tmp/texlive-profile.txt \
     && tlmgr install \
-        amsmath babel-english cbfonts-fd cm-super ctex doublestroke dvisvgm everysel \
-        fontspec frcursive fundus-calligra gnu-freefont jknapltx latex-bin \
-        mathastext microtype ms physics preview ragged2e relsize rsfs \
-        setspace standalone tipa wasy wasysym xcolor xetex xkeyval
+        amsmath babel-english cbfonts-fd cm-super caption ctex doublestroke dvisvgm environ eurosym everysel \
+        fancyvrb float fontspec frcursive fundus-calligra gnu-freefont jknapltx latex-bin \
+        mathastext microtype ms oberdiek parskip physics preview ragged2e relsize rsfs \
+        setspace standalone tcolorbox tipa ucs upquote qsymbols wasy wasysym xcolor xetex xkeyval adjustbox collectbox titling booktabs enumitem \
+    && fix-permissions /usr/local/texlive
 
 COPY nbgrader_config.py /etc/jupyter/
 RUN fix-permissions /etc/jupyter/
@@ -62,6 +63,7 @@ RUN curl -fsSL https://code-server.dev/install.sh | sh && \
 USER ${NB_UID}
 
 COPY fix-nbextensions /usr/local/bin/fix-nbextensions
+
 # Install Python 3 packages
 RUN conda install --quiet --yes \
     'hide_code=0.6.*' \
